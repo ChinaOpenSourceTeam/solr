@@ -1,0 +1,21 @@
+<dataConfig>
+    	<dataSource type="JdbcDataSource"  driver="com.mysql.jdbc.Driver"  url="jdbc:mysql://39.106.101.36:3306/opensource-ali"  user="opensource"  encoding="UTF-8" password="opensource"/>
+		<document>
+			<entity name="blog" processor="SqlEntityProcessor" pk="id"  
+				query="SELECT * FROM blog WHERE delete_flag = 0"
+				deltaQuery="SELECT  id FROM blog WHERE create_time > '${dataimporter.last_index_time}'"
+				deletedPkQuery="SELECT  id FROM blog WHERE delete_flag = 1"
+				deltaImportQuery="SELECT * FROM blog WHERE id='${dataimporter.delta.id}'"  
+				>
+            			
+				<field name="id" column="id" />  
+            			<field name="title" column="title" />  
+            			<field name="content" column="content" />
+				<field name="status" column="status" />
+				<field name="uuid" column="uuid" />
+				<field name="blogVersion" column="version" />
+				<field name="createTime" column="create_time" />
+				<field name="createUser" column="create_user" />
+      			</entity>
+		</document>
+</dataConfig>
